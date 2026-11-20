@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#140c16" />
+  <title>Fit or Feast</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%23f0c36a'/%3E%3Ctext x='32' y='44' text-anchor='middle' font-size='32'%3E✦%3C/text%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div id="app">
+    <header class="app-header">
+      <div class="brand">
+        <strong>Fit or Feast</strong>
+        <span>Visual Novel Gacha</span>
+      </div>
+      <div class="header-actions">
+        <div class="coins" id="coin-display" aria-live="polite"><span class="dot"></span><span id="coin-count">0</span></div>
+        <button class="icon-btn" id="btn-help" type="button" title="How to play" aria-label="How to play">?</button>
+      </div>
+    </header>
+
+    <main>
+      <section class="screen active" id="screen-home" data-screen="home">
+        <div class="panel">
+          <h2 class="section">Loot Box</h2>
+          <p class="lede">Spend coins on a pull, or go to work and earn a little more.</p>
+          <div class="odds-row" id="odds-row"></div>
+          <div class="capsule-wrap">
+            <div class="capsule" id="capsule" aria-hidden="true">
+              <div class="shell"></div>
+              <div class="gem"></div>
+            </div>
+          </div>
+          <button class="btn btn-gold" id="btn-pull" type="button">Pull · 100</button>
+          <button class="btn btn-10x" id="btn-pull10" type="button">10× Pull · 900</button>
+          <p class="ten-note">10 pulls for 900 coins — 10% off.</p>
+          <div class="work-wrap">
+            <div class="work-status">
+              <span>Manual income</span>
+              <span id="work-hint">+20 coins</span>
+            </div>
+            <button class="btn btn-teal" id="btn-work" type="button">Go to Work</button>
+            <div class="cooldown" aria-hidden="true"><span id="work-bar"></span></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="screen" id="screen-inventory" data-screen="inventory">
+        <h2 class="section">Inventory</h2>
+        <p class="lede">Feed a character or send them to the gym. Reroll tokens are used after a pull.</p>
+        <div class="item-list" id="inventory-list"></div>
+      </section>
+
+      <section class="screen" id="screen-collection" data-screen="collection">
+        <h2 class="section">Roster</h2>
+        <p class="lede">Collected characters live here. Tap a card to talk, feed, or train.</p>
+        <div class="roster-grid" id="roster-grid"></div>
+      </section>
+
+      <section class="screen" id="screen-character" data-screen="character">
+        <button class="back-link" id="btn-back-roster" type="button">← Back to roster</button>
+        <div class="vn-stage" id="vn-stage">
+          <img id="vn-portrait" alt="" />
+          <div class="vn-nameplate" id="vn-nameplate"></div>
+          <div class="vn-dialogue">
+            <div class="who" id="vn-who"></div>
+            <p id="vn-line"></p>
+          </div>
+        </div>
+        <div class="stats-block panel">
+          <div class="stat-top">
+            <span class="weight" id="char-weight"></span>
+            <span class="badge" id="char-stage"></span>
+          </div>
+          <p class="bio" id="char-bio"></p>
+          <div class="bar-label"><span>Weight</span><span id="weight-label"></span></div>
+          <div class="bar weight"><span id="weight-bar"></span></div>
+          <div class="bar-label"><span>Fitness</span><span id="fitness-label"></span></div>
+          <div class="bar fitness"><span id="fitness-bar"></span></div>
+        </div>
+        <div class="use-tray">
+          <h3>Use an item</h3>
+          <div class="use-grid" id="use-grid"></div>
+        </div>
+      </section>
+    </main>
+
+    <nav class="app-nav" aria-label="Primary">
+      <button type="button" data-nav="home" class="active"><span class="ico">🏠</span>Home</button>
+      <button type="button" data-nav="inventory"><span class="ico">🎒</span>Items</button>
+      <button type="button" data-nav="collection"><span class="ico">💗</span>Roster</button>
+    </nav>
+  </div>
+
+  <div class="overlay" id="overlay" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal" id="modal"></div>
+  </div>
+  <div class="toast-host" id="toast-host" aria-live="polite"></div>
+
+  <script src="data/config.js"></script>
+  <script src="data/items.js"></script>
+  <script src="data/characters.js"></script>
+  <script src="js/engine.js"></script>
+  <script src="js/save.js"></script>
+  <script src="js/game.js"></script>
+</body>
+</html>
